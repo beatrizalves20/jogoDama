@@ -74,36 +74,22 @@ public class TabuleiroGUI extends JPanel {
         // return (i%2 + j%2)%2 == 0 ? CasaGUI.COR_ESCURA : CasaGUI.COR_CLARA;
     }
 
-    public void atualizar(Jogo jogo) {
+ public void atualizar(Jogo jogo) {
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
                 CasaGUI casaGUI = casas[x][y];
-                
                 Tabuleiro tabuleiro = jogo.getTabuleiro();
                 Casa casa = tabuleiro.getCasa(x, y);
-                if (casa.possuiPeca()) {
-                    Pedra peca = casa.getPeca();
 
-                    switch (peca.getTipo()) {
-                        case Pedra.PEDRA_BRANCA:
-                            casaGUI.desenharPedraBranca();
-                            break;
-                        case DamaBranca.DAMA_BRANCA:
-                            casaGUI.desenharDamaBranca();
-                            break;
-                        case Pedra.PEDRA_VERMELHA:
-                            casaGUI.desenharPedraVermelha();
-                            break;
-                        case DamaBranca.DAMA_VERMELHA:
-                            casaGUI.desenharDamaVermelha();
-                            break;
-                    }
-                }
-                else {
+                if (casa.possuiPeca()) {
+                    Peca peca = casa.getPeca();
+                    peca.desenhar(casaGUI);
+                }else {
                     casaGUI.apagarPeca();
                 }
             }
         }
+               
     }
 
     public JanelaPrincipal getJanela() {
